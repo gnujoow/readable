@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
-import Post from '../../post'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
+import Post from '../../post';
+
+import { getAllPosts } from '../../actions/ActionCreator';
+import * as Api from '../../api';
 
 const TYPE = {
   POST: 'post',
   COMMENT: 'comment',
-}
+};
 
 class PostList extends Component {
-  render () {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sortBy: 'asc',
+      categories: '',
+    };
+  }
+  componentDidMount() {
+    Api.getAllPosts().then(res => this.props.getAllPosts(res));
+  }
+
+  render() {
+    const posts = this.props.posts.map(post => {
+      return <Post key={post.id} info={post} />;
+    });
     return (
       <div className="container">
         <div className="row">
           <div className="col s6">
             <label>Categories</label>
             <select className="browser-default">
-              <option value="" disabled selected>Choose your option</option>
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
               <option value="3">Option 3</option>
@@ -23,22 +43,33 @@ class PostList extends Component {
           <div className="col s6">
             <label>sorting</label>
             <select className="browser-default">
-              <option value="" disabled selected>Choose your option</option>
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
               <option value="3">Option 3</option>
             </select>
           </div>
         </div>
-
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        {posts}
       </div>
     );
   }
 }
 
-export default PostList;
+const mapStateToProps = state => {
+  return {
+    posts: state.posts.allPosts,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      getAllPosts,
+    },
+    dispatch,
+  );
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PostList),
+);

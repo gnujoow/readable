@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 const TYPE = {
   POST: 'post',
@@ -14,29 +15,46 @@ class Post extends Component {
   };
   render() {
     const isPost = this.props.type === TYPE.POST;
+    const { info } = this.props;
+    if (info.deleted) return null;
+    const timestamp = moment(info.timestamp).format('YYYY-MM-DD HH:MM:SS');
     return (
       <div className="row">
-        <div className="col s12">
+        <div className="col s1">
+          <div className="row">
+            <div className="col s12">
+              <a href="#">
+                <i className="medium material-icons">expand_less</i>
+              </a>
+            </div>
+          </div>
+          <div className="row">
+            <div className="center-align col s12">{info.voteScore}</div>
+          </div>
+          <div className="row">
+            <div className="col s12">
+              <a href="#">
+                <i className="medium material-icons">expand_more</i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="col s11">
           <div
             className={`card blue-grey ${isPost ? 'lighten-1' : 'darken-3'}`}
           >
             <div className="card-content white-text">
-              <span className="card-title">Card Title</span>
-              <span className="right">타임스탬프</span>
+              <span className="card-title">{info.title}</span>
+              <span className="right">{info.author}</span>
               <br />
-              <p>
-                I am a very simple card. I am good at containing small bits of
-                information. I am convenient because I require little markup to
-                use effectively.
-              </p>
+              <span className="right">{timestamp}</span>
+              <br />
+              <p>{info.body}</p>
             </div>
             <div className="card-action">
-              <a href="#">
-                <i className="material-icons">favorite</i> 9
-              </a>
               {isPost && (
                 <a href="#">
-                  <i className="material-icons">comment</i> 8
+                  <i className="material-icons">comment</i> comment
                 </a>
               )}
               <a href="#">
@@ -47,7 +65,7 @@ class Post extends Component {
                 <i className="material-icons">delete_forever</i>
                 delete
               </a>
-              {isPost && <div className="chip right">categories</div>}
+              {isPost && <div className="chip right">{info.category}</div>}
             </div>
           </div>
         </div>

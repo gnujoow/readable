@@ -4,17 +4,16 @@ import {
   POST_POST,
   PUT_POST,
   DELETE_POST,
-} from '../actions/ActionTypes'
+} from '../actions/ActionTypes';
 
 const INITIAL_STATE = {
-  posts: [],
+  allPosts: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_ALL_POSTS:
-      console.log(1);
-      return;
+      return { allPosts: action.posts };
     case GET_POSTS:
       console.log(2);
       return;
@@ -24,10 +23,10 @@ export default (state = INITIAL_STATE, action) => {
     case PUT_POST:
       console.log(3);
       return;
-    case DELTE_POSTS:
+    case DELETE_POST:
       console.log(4);
       return;
-    default
+    default:
       return state;
   }
 };

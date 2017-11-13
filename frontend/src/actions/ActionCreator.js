@@ -1,10 +1,9 @@
 import * as Action from './ActionTypes';
 import * as Api from '../api';
 
-export const getAllPosts = () => {
-  const posts = Api.getAllPosts();
+export const getAllPosts = posts => {
   return {
-    type: Aciton.GET_ALL_POSTS,
+    type: Action.GET_ALL_POSTS,
     posts,
   };
 };
@@ -19,19 +18,19 @@ export const getPost = id => {
 
 export const postPost = () => {
   return {
-    type: Action.POST_POSTS,
+    type: Action.POST_POST,
   };
 };
 
 export const editPost = () => {
   return {
-    type: Action.PUT_POSTS,
+    type: Action.PUT_POST,
   };
 };
 
 export const deletePost = () => {
   return {
-    type: Action.DELTE_POSTS,
+    type: Action.DELETE_POST,
   };
 };
 
