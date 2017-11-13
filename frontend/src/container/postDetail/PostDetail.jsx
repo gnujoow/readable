@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Post from '../../post'
+import Post from '../../post';
 
 const TYPE = {
   POST: 'post',
   COMMENT: 'comment',
-}
+};
 
 class PostDetail extends Component {
-  render () {
+  render() {
     return (
       <div className="container">
         <Post />
@@ -16,7 +16,9 @@ class PostDetail extends Component {
           <div className="col s6">
             <label>Categories</label>
             <select className="browser-default">
-              <option value="" disabled selected>Choose your option</option>
+              <option value="" disabled selected>
+                Choose your option
+              </option>
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
               <option value="3">Option 3</option>
@@ -25,22 +27,18 @@ class PostDetail extends Component {
           <div className="col s6">
             <label>sorting</label>
             <select className="browser-default">
-              <option value="" disabled selected>Choose your option</option>
+              <option value="" disabled selected>
+                Choose your option
+              </option>
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
               <option value="3">Option 3</option>
             </select>
           </div>
         </div>
-        <Post
-          type={TYPE.COMMENT}
-        />
-        <Post
-          type={TYPE.COMMENT}
-        />
-        <Post
-          type={TYPE.COMMENT}
-        />
+        <Post type={TYPE.COMMENT} />
+        <Post type={TYPE.COMMENT} />
+        <Post type={TYPE.COMMENT} />
       </div>
     );
   }

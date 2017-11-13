@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class Form extends Component {
-  render () {
+  render() {
     return (
       <div className="container">
         <h1>New Post</h1>
@@ -9,25 +9,19 @@ class Form extends Component {
           <form className="col s12">
             <div className="row">
               <div className="input-field col s12">
-                <input
-                  type="text"
-                  name="title"
-                  className="validate"
-                />
+                <input type="text" name="title" className="validate" />
                 <label>Title</label>
               </div>
               <div className="input-field col s12">
-                <input
-                  type="text"
-                  name="body"
-                  className="validate"
-                />
+                <input type="text" name="body" className="validate" />
                 <label>Body</label>
               </div>
               <div className="col s12">
                 <label>Categories</label>
                 <select className="browser-default">
-                  <option value="" disabled selected>Choose your option</option>
+                  <option value="" disabled selected>
+                    Choose your option
+                  </option>
                   <option value="1">Option 1</option>
                   <option value="2">Option 2</option>
                   <option value="3">Option 3</option>
