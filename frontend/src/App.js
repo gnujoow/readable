@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link, hashHistory } from 'react-router';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
@@ -30,6 +29,7 @@ class App extends Component {
 
           <Route exact path="/" component={PostList} />
           <Route path="/search" component={PostDetail} />
+          <Route path="/post" component={Form} />
         </div>
       </Router>
     );
