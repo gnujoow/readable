@@ -28,9 +28,10 @@ export const editPost = () => {
   };
 };
 
-export const deletePost = () => {
+export const deletePost = id => {
   return {
     type: Action.DELETE_POST,
+    id,
   };
 };
 

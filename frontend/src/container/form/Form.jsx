@@ -17,6 +17,9 @@ class Form extends Component {
       date: '',
     };
   }
+  moveToHome = () => {
+    this.props.history.push('/');
+  };
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -35,7 +38,9 @@ class Form extends Component {
     if (!author) {
       alert('author is empty');
     }
-    apiPost({ id, date, title, body, author, category });
+    apiPost({ id, date, title, body, author, category }).then(res => {
+      this.moveToHome();
+    });
   };
   render() {
     return (
@@ -101,6 +106,7 @@ class Form extends Component {
         <button
           className="btn red waves-effect waves-light right"
           name="action"
+          onClick={this.moveToHome}
         >
           cancel
           <i className="material-icons right">clear</i>

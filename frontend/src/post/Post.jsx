@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { deletePost as API_deletePost } from '../api';
+import { deletePost } from '../actions/ActionCreator';
 
 const TYPE = {
   POST: 'post',
@@ -12,6 +18,11 @@ class Post extends Component {
   };
   static defaultProps = {
     type: TYPE.POST,
+  };
+  handleDelete = id => {
+    API_deletePost(id).then(res => {
+      this.props.deletePost(id);
+    });
   };
   render() {
     const isPost = this.props.type === TYPE.POST;
@@ -61,7 +72,7 @@ class Post extends Component {
                 <i className="material-icons">mode_edit</i>
                 edit
               </a>
-              <a href="#">
+              <a onClick={() => this.handleDelete(info.id)}>
                 <i className="material-icons">delete_forever</i>
                 delete
               </a>
@@ -74,4 +85,13 @@ class Post extends Component {
   }
 }
 
-export default Post;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      deletePost,
+    },
+    dispatch,
+  );
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(Post));
