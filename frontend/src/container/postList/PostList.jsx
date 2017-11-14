@@ -24,9 +24,14 @@ class PostList extends Component {
   componentDidMount() {
     Api.getAllPosts().then(res => this.props.getAllPosts(res));
   }
+  shouldComponentUpdate(prevProp, prevState) {
+    console.log('prevState', prevState, 'prevProp', prevProp);
+    return true;
+  }
 
   render() {
     const posts = this.props.posts.map(post => {
+      console.log(post.voteScore);
       return <Post key={post.id} info={post} />;
     });
     return (

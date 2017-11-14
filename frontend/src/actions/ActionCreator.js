@@ -35,9 +35,11 @@ export const deletePost = id => {
   };
 };
 
-export const upvotePost = () => {
+export const votePost = (id, voteScore) => {
   return {
-    type: Action.POST_UPVOTE_POST,
+    type: Action.POST_VOTE_POST,
+    id,
+    voteScore,
   };
 };
 

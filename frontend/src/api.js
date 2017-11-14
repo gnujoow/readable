@@ -42,6 +42,19 @@ export const postPost = ({ id, timestamp, title, body, author, category }) => {
     .then(data => data);
 };
 
+export const votePost = (id, option) => {
+  const payLoad = {
+    option,
+  };
+  return fetch(`${API}/posts/${id}`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify(payLoad),
+  })
+    .then(res => res.json())
+    .then(data => data);
+};
+
 export const deletePost = id =>
   fetch(`${API}/posts/${id}`, { method: 'DELETE', headers: headers() })
     .then(res => res.json())
