@@ -8,7 +8,7 @@ import {
 } from '../actions/ActionTypes';
 
 const INITIAL_STATE = {
-  allPosts: [],
+  allPosts: {},
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,18 +16,22 @@ export default (state = INITIAL_STATE, action) => {
     case GET_ALL_POSTS:
       return {
         ...state,
-        allPosts: action.posts,
+        allPosts: action.posts.reduce((accu, curr) => {
+          accu[curr.id] = curr;
+          return accu;
+        }, {})
       };
     case POST_VOTE_POST:
-      const votedPosts = state.allPosts.map(post => {
-        if (post.id === action.id) {
-          post.voteScore = action.voteScore;
-          console.log('action', action.voteScore, post);
+      return {
+        ...state,
+        allPosts: {
+          ...state.allPosts,
+          [action.id]: {
+            ...state.allPosts[action.id],
+            voteScore: action.voteScore,
+          }
         }
-        return post;
-      });
-      console.log('votedPosts', votedPosts);
-      return { ...state, allPosts: votedPosts };
+      };
     case GET_POSTS:
       console.log(2);
       return;
