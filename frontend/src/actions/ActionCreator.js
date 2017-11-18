@@ -1,5 +1,4 @@
 import * as Action from './ActionTypes';
-import * as Api from '../api';
 
 export const getAllPosts = posts => {
   return {
@@ -7,10 +6,16 @@ export const getAllPosts = posts => {
     posts,
   };
 };
-export const getPost = id => {
-  const post = Api.getPost(id);
+
+export const getCategories = categories => {
   return {
-    type: Action.GET_POSTS,
+    type: Action.GET_CATEGORIES,
+    categories,
+  };
+};
+export const getPost = (id, post) => {
+  return {
+    type: Action.GET_POST,
     id,
     post,
   };

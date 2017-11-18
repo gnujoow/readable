@@ -87,8 +87,11 @@ class Form extends Component {
                   onChange={this.handleChange}
                   className="browser-default"
                 >
-                  <option value="redux">redux</option>
-                  <option value="react">react</option>
+                  {this.props.categories.map(category => (
+                    <option id={category.name} value={category.name}>
+                      {category.path}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -116,4 +119,10 @@ class Form extends Component {
   }
 }
 
-export default Form;
+const mapStateToProps = state => {
+  return {
+    post: state.posts.currentPost,
+    categories: state.categories,
+  };
+};
+export default withRouter(connect(mapStateToProps, null)(Form));

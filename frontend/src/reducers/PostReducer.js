@@ -1,6 +1,6 @@
 import {
   GET_ALL_POSTS,
-  GET_POSTS,
+  GET_POST,
   POST_POST,
   PUT_POST,
   DELETE_POST,
@@ -9,6 +9,7 @@ import {
 
 const INITIAL_STATE = {
   allPosts: {},
+  currentPost: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,9 +33,11 @@ export default (state = INITIAL_STATE, action) => {
           }
         }
       };
-    case GET_POSTS:
-      console.log(2);
-      return;
+    case GET_POST:
+      return {
+        ...state,
+        currentPost: action.post,
+      }
     case POST_POST:
       console.log(2);
       return;

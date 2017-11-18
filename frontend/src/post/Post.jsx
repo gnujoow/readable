@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -24,7 +24,6 @@ class Post extends Component {
   static defaultProps = {
     type: TYPE.POST,
   };
-  shouldComponentUpdate(prevState, prevProp) {}
   handleDelete = id => {
     API_deletePost(id).then(res => {
       this.props.deletePost(id);
@@ -36,9 +35,9 @@ class Post extends Component {
     });
   };
   render() {
-    console.log('rerender');
     const isPost = this.props.type === TYPE.POST;
     const { info } = this.props;
+    if (!info) return null;
     if (info.deleted) return null;
     const timestamp = moment(info.timestamp).format('YYYY-MM-DD HH:MM:SS');
     return (
@@ -56,7 +55,7 @@ class Post extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="center-align col s12">{info.voteScore}</div>
+            <div className="center-align col s12">{info.voteScore || 0}</div>
           </div>
           <div className="row">
             <div className="col s12">
@@ -75,19 +74,20 @@ class Post extends Component {
             className={`card blue-grey ${isPost ? 'lighten-1' : 'darken-3'}`}
           >
             <div className="card-content white-text">
-              <span className="card-title">{info.title}</span>
-              <span className="right">{info.author}</span>
+              <Link
+                className="card-title"
+                style={{ color: 'white' }}
+                to={`/read/${info.id}`}
+              >
+                {info.title}
+              </Link>
+              <span className="right">{info.author || ''}</span>
               <br />
-              <span className="right">{timestamp}</span>
+              <span className="right">{timestamp || ''}</span>
               <br />
               <p>{info.body}</p>
             </div>
             <div className="card-action">
-              {isPost && (
-                <a href="#">
-                  <i className="material-icons">comment</i> comment
-                </a>
-              )}
               <a href="#">
                 <i className="material-icons">mode_edit</i>
                 edit
@@ -96,7 +96,9 @@ class Post extends Component {
                 <i className="material-icons">delete_forever</i>
                 delete
               </a>
-              {isPost && <div className="chip right">{info.category}</div>}
+              {isPost && (
+                <div className="chip right">{info.category || ''}</div>
+              )}
             </div>
           </div>
         </div>

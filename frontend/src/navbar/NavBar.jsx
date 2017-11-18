@@ -11,7 +11,7 @@ class NavBar extends Component {
           </Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
-              <Link to="/post">post</Link>
+              <Link to="/new-post">post</Link>
             </li>
             <li>
               <a href="badges.html">github</a>
